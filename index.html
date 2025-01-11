@@ -141,13 +141,40 @@
                 });
             }
         }
+
+        function sendEmail(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            const emailBody = `
+                Email: ${data.email}
+                Phone: ${data.phone}
+                Service: ${data.service}
+                Technology: ${data.technology}
+                Material: ${data.material}
+                Post Processing: ${data.processing}
+                Description: ${data.description}
+
+                Delivery Details:
+                Name: ${data.name}
+                House/Flat/Shop No.: ${data.house}
+                Landmark: ${data.landmark}
+                State: ${data.state}
+                City: ${data.city}
+                Pincode: ${data.pincode}
+            `;
+
+            window.location.href = `mailto:your-email@example.com?subject=Instant Quote Request&body=${encodeURIComponent(emailBody)}`;
+        }
     </script>
 </head>
 <body>
     <div class="container">
         <h1>Get Instant Quote</h1>
         <p>Please fill the form below and we shall get back to you within 2 – 4 hours.</p>
-        <form>
+        <form onsubmit="sendEmail(event)">
             <div class="upload-section">
                 <p>Drag & drop here or</p>
                 <button type="button">Upload File</button>
@@ -157,11 +184,11 @@
             <div class="form-section">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email">
+                    <input type="email" id="email" name="email" placeholder="Enter your email">
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone No.</label>
-                    <input type="text" id="phone" placeholder="Enter your phone number">
+                    <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
                 </div>
             </div>
 
@@ -170,7 +197,7 @@
             <div class="form-section">
                 <div class="form-group">
                     <label for="service">Service</label>
-                    <select id="service" onchange="updateTechnologyOptions()">
+                    <select id="service" name="service" onchange="updateTechnologyOptions()">
                         <option value="" disabled selected>Select Service</option>
                         <option value="3D Printing">3D Printing</option>
                         <option value="CNC Machining">CNC Machining</option>
@@ -180,23 +207,23 @@
                 </div>
                 <div class="form-group">
                     <label for="technology">Technology</label>
-                    <select id="technology">
+                    <select id="technology" name="technology">
                         <option value="" disabled selected>Select Technology</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="material">Material</label>
-                    <input type="text" id="material" placeholder="Enter material">
+                    <input type="text" id="material" name="material" placeholder="Enter material">
                 </div>
                 <div class="form-group">
                     <label for="processing">Post Processing</label>
-                    <input type="text" id="processing" placeholder="Enter post-processing details">
+                    <input type="text" id="processing" name="processing" placeholder="Enter post-processing details">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea id="description" rows="4" placeholder="Enter description"></textarea>
+                <textarea id="description" name="description" rows="4" placeholder="Enter description"></textarea>
             </div>
 
             <h2>Delivery Detail</h2>
@@ -204,27 +231,27 @@
             <div class="form-section">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" placeholder="Enter name">
+                    <input type="text" id="name" name="name" placeholder="Enter name">
                 </div>
                 <div class="form-group">
                     <label for="house">House/Flat/Shop No.</label>
-                    <input type="text" id="house" placeholder="Enter house/flat/shop number">
+                    <input type="text" id="house" name="house" placeholder="Enter house/flat/shop number">
                 </div>
                 <div class="form-group">
                     <label for="landmark">Landmark</label>
-                    <input type="text" id="landmark" placeholder="Enter landmark">
+                    <input type="text" id="landmark" name="landmark" placeholder="Enter landmark">
                 </div>
                 <div class="form-group">
                     <label for="state">State</label>
-                    <input type="text" id="state" placeholder="Enter state">
+                    <input type="text" id="state" name="state" placeholder="Enter state">
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
-                    <input type="text" id="city" placeholder="Enter city">
+                    <input type="text" id="city" name="city" placeholder="Enter city">
                 </div>
                 <div class="form-group">
                     <label for="pincode">Pincode</label>
-                    <input type="text" id="pincode" placeholder="Enter pincode">
+                    <input type="text" id="pincode" name="pincode" placeholder="Enter pincode">
                 </div>
             </div>
 
